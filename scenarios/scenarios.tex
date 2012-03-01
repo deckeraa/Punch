@@ -1,0 +1,72 @@
+\documentclass{article}
+
+% For embedding of MetaPost code
+\usepackage{emp}
+
+% These packages aren't necessary for MetaUML
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+
+\setcounter{secnumdepth}{-1}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Punch}
+\cfoot{Copyright 2012 Aaron Decker}
+
+% MetaUML setup
+\begin{empfile}
+\begin{empcmds}
+input metauml;
+\end{empcmds}
+
+% Begin actual document here
+
+\title{ Use Cases and Scenarios for Punch }
+\author{ Aaron Decker }
+\date{ February 29, 2012 }
+\maketitle
+
+% use case diagram
+\begin{figure}[h!]
+   \centering
+   \begin{emp}[classdiag](20, 20)
+   % objects
+   Actor.developer("Developer");
+   Usecase.logTime("Log Time");
+
+   % placement
+   developer.e = logTime.w + (-20, 0);
+
+   % drawing
+   drawObjects(developer,logTime);
+
+   % linking
+   overhang = -5;
+   link(association)(developer.e + (overhang,0) -- logTime.w + (overhang,0) );
+   \end{emp}
+   \caption{Use Case Diagram for Punch}
+\end{figure}
+
+\section{ Log Time }
+\subsection{ Programming Assignment }
+    \begin{enumerate}
+    \item The developer receives a programming assignment.
+    \item The developer issues a command to Punch telling it to start clocking time.
+    \item Since the project is his third assignment in the class so far, the developer tells Punch to track the time
+          under the name ``Program 3''.
+    \item The developer copies down the relevant files from the assignment so that the developer can begin the assignment.
+          The developer also sets up a project folder and the necessary things to start such as a Makefile.
+    \item Since the time was not spent coding but was spent setting up the project, the developer tells Punch to 
+          mark the time spent as ``Project Set-up''.
+    \item However, the developer does not wish to quit working yet and tells Punch to merely mark a division in the time spent
+          on ``Program 3''.
+    \item After slamming out the code, the developer decides to take a break. 
+          The developer tells Punch to log the time as ``Coding'' and punches out.
+    \end{enumerate}
+
+\end{empfile}
+\end{document}
